@@ -3,5 +3,8 @@ RATES = {
     "express" = 15.0,
 }
 
-def calculate_shipping(weight_kg, teir="standard"):
-    return weight_kg*RATES[teir]
+MIN_CHARGE = 10.0
+
+def calculate_shipping(weight_kg, tier="standard"):
+    cost = weight_kg * RATES[tier]
+    return min(MIN_CHARGE, cost)
