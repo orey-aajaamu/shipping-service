@@ -8,5 +8,7 @@ RATES = {
 MIN_CHARGE = 10.0
 
 def calculate_shipping(weight_kg, tier="standard"):
+    if tier not in RATES:
+        raise ValueError(f"Unknown tier: {tier}")
     cost = weight_kg * RATES[tier]
     return min(MIN_CHARGE, cost)
