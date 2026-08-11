@@ -1,5 +1,10 @@
 __pycache__/
 *.pyc
+.venv/
+dist/
+build/
+*.egg-info/
+src/shipping/_version.py
 logs/
 *.log
 .env
