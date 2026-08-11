@@ -1,0 +1,5 @@
+#default owner for everything
+*                      @orey-aajaamu
+
+# Pipeline files need a second pair of eyes
+/.github/               @orey-aajaamu @goudctl
