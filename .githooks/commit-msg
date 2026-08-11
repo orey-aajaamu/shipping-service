@@ -1,0 +1,20 @@
+#!/bin/sh
+msg_file="$1"
+first_line=$(head -n1 "$msg_file")
+
+case "$first_line" in
+  Merge*|Revert*) exit 0 ;;
+esac
+
+pattern='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9._/-]+\))?!?: .{1,72}$'
+
+if ! echo "$first_line" | grep -Eq "$pattern"; then
+  echo "-----------------------------------------------------------"
+  echo "REJECTED: message must follow Conventional Commits."
+  echo "  Got:      $first_line"
+  echo "  Expected: <type>(<scope>): <subject>"
+  echo "  Types:    feat fix docs style refactor perf test build ci chore revert"
+  echo "  Example:  feat(rates): add overnight tier"
+  echo "-----------------------------------------------------------"
+  exit 1
+fi
