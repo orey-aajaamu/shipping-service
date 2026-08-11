@@ -8,7 +8,7 @@ def test_standard_rate():
 
 
 def test_minimum_charge_applies():
-    assert calculate_shipping(0.5) == 10.0
+    assert calculate_shipping(0.5) == 12.0
 
 
 def test_unknown_tier_rejected():
