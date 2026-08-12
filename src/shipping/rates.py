@@ -4,7 +4,7 @@ RATES = {
     "overnight": 30.0,
 }
 
-MIN_CHARGE = 10.0
+MIN_CHARGE = 12.0
 
 def calculate_shipping(weight_kg, tier="standard"):
     if tier not in RATES:
