@@ -65,10 +65,10 @@ jobs:
           python-version: "3.12"
 
       - name: Install build tooling
-        uses: pip install --require-hashes -r requirements-dev.txt
+        run: pip install --require-hashes -r requirements-dev.txt
 
       - name: Build
-        uses: bash scripts/build.sh 
+        run: bash scripts/build.sh 
 
       - name: Summarise
         run: |
