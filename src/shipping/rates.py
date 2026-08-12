@@ -1,5 +1,5 @@
 RATES = {
-    "standard": 4.0,
+    "standard": 5.0,
     "express": 15.0,
     "overnight": 30.0,
 }
