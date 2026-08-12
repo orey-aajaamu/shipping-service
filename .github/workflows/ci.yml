@@ -37,9 +37,9 @@ jobs:
         uses: actions/cache@4
         with:
           path: ~/.cache/pip
-          key: pip-${{ runner.os }}-py${{ matrix-python-version }}-${{ hashfiles('pyproject.toml') }}
+          key: pip-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashfiles('pyproject.toml') }}
           restore-keys: |
-            pip-${{ runner.os }}-py${{ matrix-python-version }}-
+            pip-${{ runner.os }}-py${{ matrix.python-version }}-
 
       - name: Install Dependencies
         run: pip install -e ".[dev]"
