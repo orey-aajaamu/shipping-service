@@ -64,7 +64,7 @@ jobs:
           echo "### Proposed release"
           echo ""
           echo "| Field | Value |"
-          echo "|---|---|
+          echo "|---|---|"
           echo "| Last tag | \`${LAST_TAG:-none}\` |"
           echo "| Bump | \`$BUMP\` |"
           echo "| Next version | \`$NEXT\` |"
