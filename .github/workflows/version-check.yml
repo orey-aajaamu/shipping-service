@@ -37,7 +37,7 @@ jobs:
 
             if [ -z "$SUBJECTS" ]; then
               BUMP="none"
-            elif grep -qE "^(BREAKING CHANGE:|[a-z]+(\(.+\))?!:)" << "$FULL"; then
+            elif grep -qE "^(BREAKING CHANGE:|[a-z]+(\(.+\))?!:)" <<< "$FULL"; then
               BUMP="major"
             elif grep -qE "^(feat(\(.+\))?:)" <<< "$SUBJECTS"; then
               BUMP="minor"
