@@ -1,0 +1,21 @@
+name: PR checks
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quick:
+    uses: ./.github/workflows/reusable-python-check.yml
+    with:
+      python-version: "3.12"
+      run-lint: true
+
+  report:
+    needs: quick
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Checked version ${{ needs.quick.outpus.version }}"
