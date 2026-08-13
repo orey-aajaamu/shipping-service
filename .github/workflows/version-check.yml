@@ -48,7 +48,7 @@ jobs:
             fi
 
             V=${LAST_TAG#v}
-            MAJOR=${V%%*.}; REST=${V#*.}; MINOR=${REST%%*.}; PATCH=${REST#*.}
+            MAJOR=${V%%.*}; REST=${V#*.}; MINOR=${REST%%.*}; PATCH=${REST#*.}
             case "$BUMP" in
               major) NEXT="v$((MAJOR + 1)).0.0" ;;
               minor) NEXT="v${MAJOR}.$((MINOR + 1)).0" ;;
