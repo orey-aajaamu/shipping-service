@@ -34,7 +34,7 @@ jobs:
       - name: Setup python version
         uses: actions/setup-python@v6
         with:
-          python-version: ${{ input.python-version }}
+          python-version: ${{ inputs.python-version }}
 
       - name: install
         run: pip install -e ".[dev]"
