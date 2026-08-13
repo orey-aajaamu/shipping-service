@@ -52,7 +52,7 @@ jobs:
             case "$BUMP" in
               major) NEXT="v$((MAJOR + 1)).0.0" ;;
               minor) NEXT="v${MAJOR}.$((MINOR + 1)).0" ;;
-              patch) NEXT="v${MAJOR}.{MINOR}.$((PATCH + 1))" ;;
+              patch) NEXT="v${MAJOR}.${MINOR}.$((PATCH + 1))" ;;
               none) NEXT="$LAST_TAG" ;;
             esac
           fi
