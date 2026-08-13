@@ -52,5 +52,5 @@ jobs:
         run: |
           gh release create "${GITHUB_REF_NAME}" \
           dist/*.whl dist/*.tar.gz dist/SHA256SUMS dist/build-info.json \
-          --title "${GITHUB_REF_NAME}"
+          --title "${GITHUB_REF_NAME}" \
           --generate-notes
