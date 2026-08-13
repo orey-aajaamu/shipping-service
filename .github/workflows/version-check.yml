@@ -1,0 +1,72 @@
+name: Version check
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  next-version:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      bump: ${{ steps.calc.output.bump }}
+      next_version: ${{ steps.calc.output.next_version }}
+    steps:
+      - name: Check the Repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Calculate next version from commit message
+        id: calc
+        run: |
+          set -euo pipefail
+
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+
+          if [ -z "$LAST_TAG" ]; then
+            BUMP="initial"
+            NEXT="v0.1.0"
+          else
+            RANGE="${LAST_TAG}..HEAD"
+            SUBJECTS=$(git log --pretty=format:"%s" "$RANGE")
+            FULL=$(git log --pretty=format:"%s%n%d" "$RANGE")
+
+            if [ -z "$SUBJECTS" ]; then
+              BUMP="none"
+            elif grep -qE "^(BREAKING CHANGE:|[a-z]+(\(.+\))?!:)" <<< "$FULL"; then
+              BUMP="major"
+            elif grep -qE "^(feat(\(.+\))?:)" <<< "$SUBJECTS"; then
+              BUMP="minor"
+            elif grep -qE "^(fix(\(.+\))?:)" <<< "$SUBJECTS"; then
+              BUMP="patch"
+            else
+              BUMP="none"
+            fi
+
+            V=${LAST_TAG#v}
+            MAJOR=${V%%*.}; REST=${V#*.}; MINOR=${REST%%*.}; PATCH=${REST#*.}
+            case "$BUMP" in
+              major) NEXT="v$((MAJOR + 1)).0.0" ;;
+              minor) NEXT="v${MAJOR}.$((MINOR + 1)).0" ;;
+              patch) NEXT="v${MAJOR}.{MINOR}.$((PATCH + 1))" ;;
+              none) NEXT="$LAST_TAG" ;;
+            esac
+          fi
+
+          echo "bump=$BUMP" >> "$GITHUB_OUTPUT"
+          echo "next_version=$NEXT" >> "$GITHUB_OUTPUT"
+
+          {
+          echo "### Proposed release"
+          echo ""
+          echo "| Field | Value |"
+          echo "|---|---|"
+          echo "| Last tag | \`${LAST_TAG:-none}\` |"
+          echo "| Bump | \`$BUMP\` |"
+          echo "| Next version | \`$NEXT\` |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
