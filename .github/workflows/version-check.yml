@@ -67,6 +67,6 @@ jobs:
           echo "|---|---|
           echo "| Last tag | \`${LAST_TAG:-none}\` |"
           echo "| Bump | \`$BUMP\` |"
-          echo "| Next version | \'`$NEXT\` |"
+          echo "| Next version | \`$NEXT\` |"
           } >> "$GITHUB_STEP_SUMMARY"
 
