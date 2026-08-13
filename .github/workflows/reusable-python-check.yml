@@ -16,7 +16,7 @@ on:
     outputs:
       version:
         description: "Version derived from git describe"
-        value: {{ jobs.checks.outputs.version }}
+        value: ${{ jobs.checks.outputs.version }}
 
 jobs:
   checks:
