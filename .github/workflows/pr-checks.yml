@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   quick:
-    uses: ./.github/workflows/reusable-python-checks.yml
+    uses: ./.github/workflows/reusable-python-check.yml
     with:
       python-version: "3.12"
       run-lint: true
