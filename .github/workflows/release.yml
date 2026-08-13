@@ -31,7 +31,7 @@ jobs:
         run: |
           set -euo pipefail
           TAG="${GITHUB_REF_NAME}"
-          DESCRIBED=$(git describe --tags --exact-match 2>dev/null || echo "")
+          DESCRIBED=$(git describe --tags --exact-match 2>/dev/null || echo "")
           if [ "$DESCRIBED" != "$TAG" ]; then
             echo "::error::Tag $TAG does not point at HEAD (descibed as '$DESCRIBED')"
             exit 1
