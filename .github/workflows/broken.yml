@@ -1,0 +1,28 @@
+name: Deliberately broken
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  broken:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: This fails, shallow clones has no tags
+        run: git describe --tags
+
+      - name: This never runs
+        run: echo "unrechable"
+
+      - name: but this does
+        if: always()
+        run: echo "always() runs regardless of earlier failures"
+
+      - name: And this only on failure
+        if: failure()
+        run: echo "failure() saw a failed step"
