@@ -1,5 +1,5 @@
 #default owner for everything
-*                      @orey-aajaamu
+*                      @vkctl
 
 # Pipeline files need a second pair of eyes
-/.github/               @orey-aajaamu @goudctl
+/.github/               @vkctl @goudctl
