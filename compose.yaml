@@ -1,0 +1,35 @@
+services:
+  api:
+    build:
+      context: .
+      target: runtime
+      args:
+        APP_VERSION: ${APP_VERSION:-0.0.0-local}
+    image: shipping-service:local
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENVIRONMENT: local
+      DATABASE_URL: postgresql://shipping:shipping@db:5432/shipping
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+  
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: shipping
+      POSTGRES_PASSWORD: shipping
+      POSTGRES_DB: shipping
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shipping"]
+      interval: 5s
+      timeout: 30s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  db-data:
