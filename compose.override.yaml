@@ -1,0 +1,9 @@
+services:
+  api:
+    build:
+      context: .
+      target: dev
+    volumes:
+      - ./src:/app/src
+    environment:
+      APP_ENVIRONMENT: dev
