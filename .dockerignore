@@ -1,0 +1,37 @@
+# version control
+.git
+.gitignore
+.github
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# build output
+dist/
+build/
+
+# local config and secrets
+.env
+.env.*
+*.log
+logs/
+
+# editor
+.vscode/
+.idea/
+
+# not needed in the image
+README.md
+docs/
+compose*.yaml
+Dockerfile*
+.dockerignore
+
+hadolint.exe
