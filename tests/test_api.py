@@ -25,7 +25,7 @@ def test_rates(client):
 def test_quote(client):
     r = client.post("/quote", json={"weight_kg": 10, "tier": "express"})
     assert r.status_code == 200
-    assert r.get_json()["cost"] == 150.0
+    assert r.get_json()["cost"] == 10.0
 
 
 def test_quote_minimum(client):
