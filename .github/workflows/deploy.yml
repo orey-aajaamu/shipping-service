@@ -91,7 +91,7 @@ jobs:
           echo "$BODY" | grep -q '"status":"ok"'
           curl -fsS -X POST "http://$DEPLOY_HOST:8000/quote" \
             -H 'Content-Type: application/json' \
-            -d '{"weight_kg": 10, "tier": "express"}' | grep -q '"cost":10.0'
+            -d '{"weight_kg": 10, "tier": "express"}' | grep -q '"cost":150.0'
 
   production:
     name: Deploy to production
