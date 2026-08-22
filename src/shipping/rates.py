@@ -11,3 +11,5 @@ def calculate_shipping(weight_kg, tier="standard"):
         raise ValueError(f"Unknown tier: {tier}")
     cost = weight_kg * RATES[tier]
     return max(MIN_CHARGE, cost)
+
+#Just checking the pipeline with a comment & merge
